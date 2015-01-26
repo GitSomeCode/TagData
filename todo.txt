@@ -1,0 +1,2 @@
+implement sleep for api calls
+write files for each tag
