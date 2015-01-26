@@ -10,7 +10,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import environ
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# Reads the environment file (.env)
+environ.Env.read_env(env_file="../.env")
+env = environ.Env()
+API_KEY = env("api_key")
 
 
 # Quick-start development settings - unsuitable for production
