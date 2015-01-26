@@ -14,7 +14,7 @@ import environ
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Reads the environment file (.env)
-environ.Env.read_env(env_file="../.env")
+environ.Env.read_env(env_file=".env")
 env = environ.Env()
 API_KEY = env("api_key")
 
