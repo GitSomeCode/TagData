@@ -1,11 +1,23 @@
 from django.test import TestCase
 from tags.models import Tag, TagRelation
 from main import *
+import os, unirest
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Data.settings")
 
 # Create your tests here.
 class ManageRelation(TestCase):
   def setup(self):
     pass
+  
+  def test_timeout(self):
+    unirest.timeout(2)
+    response = unirest.get("http://google.com")
+    self.assertEqual(response.code, 200)
+    
+  def test_lastfm_api_call(self):
+    api_url = "http://ws.audioscrobbler.com/2.0/"
+    lastfmCall = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"tag.getinfo", "tag":"disco", "format":"json"})
+    self.assertEqual(lastfmCall.code, 200)
   
   def test_calc(self):
     exampleTuple = (("country", 20),("western", 30))

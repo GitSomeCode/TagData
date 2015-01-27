@@ -97,6 +97,7 @@ def artistRelation(artists):
   # for each artist, compile a list of tuples with their tag information, save tags to database, create combinations, calc, create TagRelation, and save TagRelation
   for a in artists:
     print "calculating relations for .... " + str(a)
+    unirest.timeout(1)
     artistsTags = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "artist":a, "method":"artist.getTopTags", "format":"json"})
     tag_body = artistsTags.body
 
