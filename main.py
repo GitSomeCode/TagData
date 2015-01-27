@@ -1,12 +1,12 @@
 from __future__ import division
-#import django
+import django
 from django.db.models import F
 import os, unirest
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Data.settings")
 from django.conf import settings
 from tags.models import Tag, TagRelation
 import itertools, json
-#django.setup()
+
 
 
 api_url = "http://ws.audioscrobbler.com/2.0/"
@@ -121,4 +121,10 @@ def artistRelation(artists):
     calcGroup(tag_list)
 #################################
 
-
+if __name__ == '__main__': 
+  """
+  Main entry point to the script.
+  """
+  django.setup()
+  getTopArtists()
+  artistRelation(artists)
