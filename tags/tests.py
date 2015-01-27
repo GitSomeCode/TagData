@@ -2,7 +2,6 @@ from django.test import TestCase
 from tags.models import Tag, TagRelation
 from main import *
 import os, unirest
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Data.settings")
 
 # Create your tests here.
 class ManageRelation(TestCase):
