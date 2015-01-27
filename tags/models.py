@@ -5,9 +5,17 @@ class Tag(models.Model):
   name = models.CharField(max_length = 30, default = "", blank = False)
   count = models.IntegerField(default = 0, blank = False)
   relation = models.ManyToManyField("self", symmetrical = False, through ='TagRelation')
+  tag_slug = models.SlugField(blank = False, default = "", unique = True)
   
   def __unicode__(self):
     return "%s" %(self.name[:24])
+  
+  def save(self, *args, **kwargs):
+    if not self.id:
+      self.tag_slug = slugify(self.name)
+      
+    super(Tag, self).save(*agrs, **kwargs)
+    
   
 class TagRelation(models.Model):
   tag_to = models.ForeignKey('Tag', blank = False, related_name = "tag_to")

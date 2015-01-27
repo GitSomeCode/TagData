@@ -32,7 +32,7 @@ class DisplayRelations(ListView):
       if relation:
         self.relations_list.append(relation)
     
-    
+    return self.relations_list
   
   def get_context_data(self, **kwargs):
     pass
