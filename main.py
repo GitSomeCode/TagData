@@ -78,6 +78,24 @@ def getRelation(name1, name2):
         pass
     return None
 #################################
+def TF(search):
+  mylist = []
+  for tag in Tag.objects.all():
+    relation = getRelation(search, tag.name)
+    if relation:
+      t = ()
+      if relation.tag_to.name == search:
+        print relation.tag_from.name
+        print relation.metric
+        t += (relation.tag_from.name, relation.metric)
+        mylist.append(t)
+      else:
+        print relation.tag_to.name
+        print relation.metric
+        t += (relation.tag_to.name, relation.metric)
+        mylist.append(t)
+  return mylist
+#################################
 
 def getTopArtists():
   '''

@@ -8,8 +8,8 @@
   
   <body>
     <h1>Search a tag</h1>
-    <form method="GET" action="{% tags:relations %}">
-      <input type="search" name="tag_search">
+    <form method="GET" action="{% url 'tags:relations' %}">
+      <input type="search" name="s">
       <input type="submit" value="search">
     </form>
   </body>

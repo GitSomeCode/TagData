@@ -7,6 +7,9 @@
   </head>
   
   <body>
-    
+    {% for name, metric in object_list %}
+      {{ name }}
+      {{ metric }}
+    {% endfor %}
   </body>
 </html>
