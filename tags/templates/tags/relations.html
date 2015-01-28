@@ -8,7 +8,7 @@
   
   <body>
     <h1>Tags related to: {{ searched }}</h1>
-    <h4><a href="{% url 'tags:compare' %}?s={{ searched }}">compare to LastFM's similar tags</a></h4>
+    <input type="button" id="compare" value="compare to LastFM's similar tags">
     
     
     <table id="myTable">
@@ -17,15 +17,15 @@
         <th id="ourMetric">metric</th>
       </tr>
       
-      <tbody id="myTody">
+      <tbody id="myTbody">
         {% for name, metric in object_list %}
         <tr>  
-        <td>
-          {{ name }}
-        </td>
-        <td>
-          {{ metric }}
-        </td>
+          <td>
+            {{ name }}
+          </td>
+          <td>
+            {{ metric }}
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -35,7 +35,7 @@
       
     
     <div id="paginate">
-    {% if is_paginated %}
+      {% if is_paginated %}
         {% if page_obj.has_previous %}
           <a href="{% url 'tags:relations' %}?page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
@@ -54,14 +54,14 @@
     <script type="text/javascript">
       function seeComparison(){
         $.ajax({
-          url: 'compare/tag/?s={{searched}}', 
+          url: "{% url 'tags:compare' %}?s={{ searched }}",
           type: 'GET',
           dataType: 'json',
           success: function(data, textstatus, jqXHR){
             appendData(data);
           },
           error: function(data, textstatus, jqXHR){
-            alert("Ooops, error!")
+            alert("Ooops, error!");
           }
         });
       }
@@ -73,9 +73,11 @@
       lastFM's getSimilarTag api call. 
       Before anything, it cleans up the table first!
       */
-        var len = somedata.length;
-        var tabledata = "";
-        alert("HI!");
+        cleanUp();
+        $('#myTable').find("tr:first").append("<th>LastFM tag</th>");
+        $('#myTbody tr').each(function(index){
+          $(this).append("<td>" + somedata[index] + "</td>");
+        });
       }
       
       function cleanUp(){
@@ -87,9 +89,15 @@
         $('td:nth-child(2)').hide();
         $('#ourMetric').hide();
         $('#paginate').hide();
+        $('#compare').hide();
       }
       
-      $(document).ready({
+      $(document).ready(function(){
+        
+        $('#compare').click(function(){
+        
+          seeComparison();
+        });
         
       });
     </script>

@@ -57,10 +57,10 @@ class DisplayRelations(ListView):
     return query_set
 
 class CompareLastFM(View):
-  def get(self):
+  def get(self, request, *args, **kwargs):
     tag_to_compare = self.request.GET.get("s", None)
     lastfmResults = compareLastFM(tag_to_compare)
-    return HttpResponse(json.dumps(lastfmResults), mimetype="application/json")
+    return HttpResponse(json.dumps(lastfmResults), content_type="application/json")
     
   
   
