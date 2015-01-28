@@ -5,13 +5,19 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedire
 from main import *
 from tags.models import Tag, TagRelation
 from django.views.generic import DetailView, ListView, TemplateView
+from operator import itemgetter
 
 # Create your views here.
 class DisplayRelations(ListView):
   model = Tag
   template_name = "tags/relations.html"
-  #paginate_by = 50
-  #page_kwarg = "page"
+  paginate_by = 50
+  page_kwarg = "page"
+  
+  def get_context_data(self, **kwargs):
+    context = super(DisplayRelations, self).get_context_data(**kwargs)
+    context['searched'] = self.request.GET.get('s', None)
+    return context
 
   def get_queryset(self):
     searched_tag = self.request.GET.get("s", None)
@@ -45,10 +51,22 @@ class DisplayRelations(ListView):
             mylist.append(t)
       return mylist
 
-    return relationsList(searched_tag)
+    # Sorts metric in descending order, so the most related tags are first
+    query_set = sorted(relationsList(searched_tag), key=itemgetter(1), reverse=True)
+    return query_set
+
+class CompareLastFM(ListView):
+  model = Tag
+  template_name = "tags/compare.html"
   
-  def get_context_data2(self, **kwargs):
-    pass
+  def get_queryset(self):
+    tag_to_compare = self.request.GET.get("s", None)
+    print "tag to compare is " + str(tag_to_compare)
+    return compareLastFM(tag_to_compare)
+  
+  
+  
+  
   
     
     

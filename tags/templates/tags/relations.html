@@ -7,9 +7,29 @@
   </head>
   
   <body>
+    <h1>Tags related to: {{ searched }}</h1>
+    <h4><a href="{% url 'tags:compare' %}?s={{ searched }}">compare to LastFM's similar tags</a></h4>
     {% for name, metric in object_list %}
-      {{ name }}
-      {{ metric }}
+    <ul>  
+      <li>
+        {{ name }} : {{ metric }}
+      </li>
+    </ul>
     {% endfor %}
+    
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+          <a href="{% url 'tags:relations' %}?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        
+        {% if page_obj.has_next %}
+            <a href="{% url 'tags:relations' %}?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+
+      {% endif %}
+    
+    
   </body>
 </html>

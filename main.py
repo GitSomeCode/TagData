@@ -11,6 +11,18 @@ import itertools, json
 
 api_url = "http://ws.audioscrobbler.com/2.0/"
 artists = []
+similar_tags = []
+##################################
+def compareLastFM(getSimilarTo):
+  print "in main's compare function now...going to use tag " + str(getSimilarTo) 
+  similarTags = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "tag":getSimilarTo, "method":"tag.getsimilar", "format":"json"})
+  result = similarTags.body
+  
+  for t in result["similartags"]["tag"]:
+    print t["name"]
+    similar_tags.append(t["name"])
+  print len(similar_tags)
+  return similar_tags
 
 ##################################
 def calc(exampleTuple, percent):
