@@ -4,8 +4,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, Http404, HttpResponseForbidden
 from main import *
 from tags.models import Tag, TagRelation
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView, View
 from operator import itemgetter
+import json
 
 # Create your views here.
 class DisplayRelations(ListView):
@@ -55,14 +56,12 @@ class DisplayRelations(ListView):
     query_set = sorted(relationsList(searched_tag), key=itemgetter(1), reverse=True)
     return query_set
 
-class CompareLastFM(ListView):
-  model = Tag
-  template_name = "tags/compare.html"
-  
-  def get_queryset(self):
+class CompareLastFM(View):
+  def get(self):
     tag_to_compare = self.request.GET.get("s", None)
-    print "tag to compare is " + str(tag_to_compare)
-    return compareLastFM(tag_to_compare)
+    lastfmResults = compareLastFM(tag_to_compare)
+    return HttpResponse(json.dumps(lastfmResults), mimetype="application/json")
+    
   
   
   

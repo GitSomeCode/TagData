@@ -9,13 +9,31 @@
   <body>
     <h1>Tags related to: {{ searched }}</h1>
     <h4><a href="{% url 'tags:compare' %}?s={{ searched }}">compare to LastFM's similar tags</a></h4>
-    {% for name, metric in object_list %}
-    <ul>  
-      <li>
-        {{ name }} : {{ metric }}
-      </li>
-    </ul>
-    {% endfor %}
+    
+    
+    <table>
+      <tr>
+        <thead id="ourTag">tag</thead>
+      </tr>
+      <tr>
+        <thead id="ourMetric">metric</thead>
+      </tr>
+      
+      {% for name, metric in object_list %}
+      <tr>  
+      <td>
+        {{ name }}
+      </td>
+      <td>
+        {{ metric }}
+      </td>
+      </tr>
+      {% endfor %}
+    <table>
+      
+      
+      
+    
     
     {% if is_paginated %}
         {% if page_obj.has_previous %}
@@ -30,6 +48,44 @@
 
       {% endif %}
     
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      function seeComparison(){
+        $.ajax({
+          url: 'compare/tag/?s={{searched}}', 
+          type: 'GET',
+          dataType: 'json',
+          success: function(data, textstatus, jqXHR){
+            appendData(data);
+          },
+          error: function(data, textstatus, jqXHR){
+            alert("Ooops, error!")
+          }
+        });
+      }
+      
+      function appendData(somedata){
+      /*
+      This function takes data returned from AJAX get and 
+      makes a new column to display the tags from 
+      lastFM's getSimilarTag api call. 
+      Before anything, it cleans up the table first!
+      */
+        
+      }
+      
+      function cleanUp(){
+      /* 
+      Hides the metric column.
+      */
+        $('td:nth-child(2)').hide();
+      }
+      
+      $(document).ready({
+        
+      });
+    </script>
     
   </body>
 </html>
