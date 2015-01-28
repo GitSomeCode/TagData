@@ -112,7 +112,7 @@ def getTopArtists():
   Calls api method "chart.getTopArtists"
   Stores artist names in list
   '''
-  topArtists = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"chart.gettopartists", "format":"json", "limit":"2"})
+  topArtists = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"chart.gettopartists", "format":"json", "limit":"4"})
   result = topArtists.body
   
   # making a list of artist names from chart.getTopArtists
@@ -133,7 +133,7 @@ def artistRelation(artists):
     tag_list = []
       
       
-    for tag_dict in tag_body["toptags"]["tag"][:10]:
+    for tag_dict in tag_body["toptags"]["tag"]:
       tag_tuple = (tag_dict["name"], int(tag_dict["count"]))
       tag_list.append(tag_tuple)
       
