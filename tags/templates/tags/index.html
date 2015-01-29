@@ -4,6 +4,7 @@
 {% block title %}Home{% endblock %}
 
 {% block styles %}
+<link rel="stylesheet" href="{% static 'tags/css/index.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -27,21 +28,23 @@
     
     <!-- general info -->
     <div class="row">
-      <div class="col-md-4 icons float-right">
+      
+      <div class="col-md-4 icons">
         <i class="fa fa-search fa-4x"></i>
       </div>
       
-      <div class="col-md-8 descriptions">
+      <div class="col-md-8 descriptions row-eq-height">
         <h2>Search for a tag and see how closely associated it is to other tags.</h2>
       </div>
+    
     </div>
     
     <div class="row">
-      <div class="col-md-4 icons float-right">
+      <div class="col-md-4 icons">
         <i class="fa fa-files-o fa-4x"></i>
       </div>
       
-      <div class="col-md-8 descriptions">
+      <div class="col-md-8 descriptions row-eq-height">
         <h2> Compare our results with last.fm's results for similarity.</h2>
       </div>
     </div>
