@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>
-      LastFM tag relations
-    </title>
-  </head>
-  
-  <body>
+{% extends 'tags/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Home{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block main %}
     <h1>Search a tag</h1>
     <form method="GET" action="{% url 'tags:relations' %}">
       <input type="search" name="s">
       <input type="submit" value="search">
     </form>
-  </body>
-</html>
+{% endblock %}

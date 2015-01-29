@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>
-      LastFM tag relations
-    </title>
-  </head>
-  
-  <body>
-    
+{% extends 'tags/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block main %}
     <!-- search form -->
     <form method="GET" action="{% url 'tags:relations' %}">
       <input type="search" name="s">
@@ -60,9 +59,10 @@
 
       {% endif %}
     </div>
+{% endblock %}
     
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js" type="text/javascript"></script>
+{% block scripts %}
     <script type="text/javascript">
       function seeComparison(){
         $.ajax({
@@ -113,6 +113,5 @@
         
       });
     </script>
+{% endblock %}
     
-  </body>
-</html>
