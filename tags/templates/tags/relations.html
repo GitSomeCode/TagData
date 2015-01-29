@@ -7,8 +7,8 @@
 {% endblock %}
 
 {% block main %}
-
 <div class="container">
+  
   <!-- Static navbar -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -42,9 +42,12 @@
     </div>
     <!--/.container-fluid -->
   </nav>
-  <!-- Main component for a primary marketing message or call to action -->
+  <!-- end of navbar -->
+</div>
+<!-- /container -->
+
+<div class="container">
   <div class="jumbotron">
-    
     <h1>Tags related to: {{ searched }}</h1>
     <input type="button" class="btn btn-dafult" id="compare" value="compare to LastFM's similar tags">
     
@@ -54,7 +57,6 @@
           <th id="ourTag">tag</th>
           <th id="ourMetric">metric</th>
         </tr>
-
         <tbody id="myTbody">
           {% for name, metric in object_list %}
           <tr>  
@@ -67,10 +69,10 @@
           </tr>
           {% endfor %}
         </tbody>
-      <table>
+      </table>
     </div>
-      
-   <div id="paginate">
+    
+    <div id="paginate">
       {% if is_paginated %}
         {% if page_obj.has_previous %}
           <a href="{% url 'tags:relations' %}?s={{ searched }}&page={{ page_obj.previous_page_number }}">Previous</a>
@@ -84,11 +86,12 @@
 
       {% endif %}
     </div>
-      
     
   </div>
-</div>
-<!-- /container -->
+</div> <!-- /container -->
+
+
+
 {% endblock %}
     
 
