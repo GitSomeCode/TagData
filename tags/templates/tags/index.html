@@ -7,9 +7,45 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Search a tag</h1>
-    <form method="GET" action="{% url 'tags:relations' %}">
-      <input type="search" name="s">
-      <input type="submit" value="search">
-    </form>
+  <div class="container">
+    
+    <!-- big search bar -->
+    <div class="row">
+      <div class="col col-md-12 text-center">
+        
+        <h1 class="heading" id="maintitle">Tagbits</h1>
+        
+        <form method="GET" action="{% url 'tags:relations' %}">
+          <input class="searchbar" type="search" name="s" placeholder="Ex. rock" autofocus>
+          <input type="submit" value="search">
+        </form>
+        
+      </div>
+    </div>
+    <!-- endof big search bar -->
+    
+    
+    <!-- general info -->
+    <div class="row">
+      <div class="col-md-4 icons">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div class="col-md-8 descriptions">
+        hiiii
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 icons">
+        <i class="fa fa-files-o"></i>
+      </div>
+      
+      <div class="col-md-8 descriptions">
+      </div>
+    </div>
+    <!-- endof general info -->
+  </div>
+
+    
 {% endblock %}
