@@ -7,8 +7,7 @@ from django.conf import settings
 from tags.models import Tag, TagRelation
 import itertools, json
 
-
-
+ARTIST_LIMIT = "4"
 api_url = "http://ws.audioscrobbler.com/2.0/"
 artists = []
 ##################################
@@ -112,7 +111,7 @@ def getTopArtists():
   Calls api method "chart.getTopArtists"
   Stores artist names in list
   '''
-  topArtists = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"chart.gettopartists", "format":"json", "limit":"4"})
+  topArtists = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"chart.gettopartists", "format":"json", "limit":ARTIST_LIMIT})
   result = topArtists.body
   
   # making a list of artist names from chart.getTopArtists
@@ -134,17 +133,18 @@ def artistRelation(artists):
       
       
     for tag_dict in tag_body["toptags"]["tag"]:
-      tag_tuple = (tag_dict["name"], int(tag_dict["count"]))
-      tag_list.append(tag_tuple)
-      
-      # add tag to database
-      #new_tag, created = Tag.objects.get_or_create(name=tag_tuple[0], count=tag_tuple[1])
-      new_tag, created = Tag.objects.get_or_create(name=tag_tuple[0])
-      if created == False:
-        print str(new_tag.name) + " already exists"
-        new_tag.count =  tag_tuple[1]
-      else: 
-        print str(new_tag.name) + " now created"
+	  if int(tag_dict["count"]) > 1:
+		  tag_tuple = (tag_dict["name"], int(tag_dict["count"]))
+		  tag_list.append(tag_tuple)
+		  
+		  # add tag to database
+		  #new_tag, created = Tag.objects.get_or_create(name=tag_tuple[0], count=tag_tuple[1])
+		  new_tag, created = Tag.objects.get_or_create(name=tag_tuple[0])
+		  if created == False:
+			print str(new_tag.name) + " already exists"
+			new_tag.count =  tag_tuple[1]
+		  else: 
+			print str(new_tag.name) + " now created"
 
     calcGroup(tag_list)
 #################################
