@@ -43,58 +43,63 @@
 
 
 
-  <div class="container">
+<div class="container">
     
-    <!-- big search bar -->
-    <div class="row">
-      <div class="col col-md-12 text-center">
-        
-        <h1 class="heading" id="maintitle">Tagbits</h1>
-        
-        <form method="GET" action="{% url 'tags:relations' %}" action="/search" class="navbar-form" role="search">
-          
-            <div class="input-group add-on">
-              <input autocomplete="on" class="form-control" class="searchbar" type="search" name="s" placeholder="Ex. rock" autofocus/>
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          
-        </form>
-        
-        
-      </div>
-    </div>
-    <!-- endof big search bar -->
-    
-    
-    <!-- general info -->
-    <div class="row text-center">
-      
-      <div class="col-md-12 descriptions">
-        <h4><i class="fa fa-search fa-2x"></i> Search for a tag and see how closely associated it is to other tags.</h4>
-      </div>
-      
-      <div class="methodlinks">
-        <span class="label label-default">Top Artists Method</span>
-        <span class="label label-default">Top Tags Method</span>
-      </div>
-    
-    </div>
-    
-    <div class="row text-center">
+  <!-- big search bar -->
+  <div class="row">
+    <div class="col col-md-12 text-center">
 
-      <div class="col-md-12 descriptions">
-        <h4><i class="fa fa-files-o fa-2x"></i> Compare our results with last.fm's results for similarity.</h4>
-      </div>
-      
-      <div class="methodlinks">
-        <span class="label label-default">Get Similar Tags Method</span>
-      </div>
-      
+      <h1 class="heading" id="maintitle">Tagbits</h1>
+
+      <form method="GET" action="{% url 'tags:relations' %}" action="/search" class="navbar-form" role="search">
+
+        <div class="input-group add-on">
+          <input autocomplete="on" class="form-control" class="searchbar" type="search" name="s" placeholder="Ex. rock" autofocus/>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+
+      </form>
+
+
     </div>
-    <!-- endof general info -->
   </div>
+  <!-- endof big search bar -->
+  
+</div>
+<!-- end of container -->
+
+<div class="container">
+  <!-- general info -->
+  <div class="row text-center">
+
+    <div class="col-md-12 descriptions">
+      <h4><i class="fa fa-search fa-2x"></i> Search for a tag and see how closely associated it is to other tags.</h4>
+    </div>
+
+    <div class="methodlinks">
+      <span class="label label-default"><a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">Top Artists Method</a></span>
+      <span class="label label-default"><a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">Top Tags Method</a></span>
+    </div>
+
+  </div>
+
+  <div class="row text-center">
+
+    <div class="col-md-12 descriptions">
+      <h4><i class="fa fa-files-o fa-2x"></i> Compare our results with last.fm's results for similarity.</h4>
+    </div>
+
+    <div class="methodlinks">
+      <span class="label label-default"><a href="http://www.last.fm/api/show/tag.getSimilar" target="_blank">Get Similar Tags Method</a></span>
+    </div>
+
+  </div>
+  <!-- endof general info -->
+  
+</div>
+<!-- end of container -->
 
     
 {% endblock %}

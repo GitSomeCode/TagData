@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'tags/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'tags/css/stickyfooter.css' %}">
     
     {% block styles %}
     {% endblock %}
@@ -23,7 +24,11 @@
       {% block main %}
       {% endblock %}
 
-    
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
     
     
     
