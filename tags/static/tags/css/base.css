@@ -1,0 +1,31 @@
+.label, .label-default {
+    background-color: #E29F53;
+    padding: 8px 8px 8px 8px;
+    border: 2px solid #FFDDB0;
+    border-radius: 10px;
+}
+
+.label-default > a{
+    color: #ffffff;
+}
+
+.navbar-default{
+    border: 1px solid #EFC494;
+    background-color: #ffffff;
+    color: #B8B4B4;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a{
+    color: #B8B4B4;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+color: #FFF;
+background-color: #F2C087;
+}
+
+.fa-search{
+    color: #E29F53;
+}
+
+
