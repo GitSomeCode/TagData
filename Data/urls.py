@@ -8,3 +8,5 @@ urlpatterns = patterns('',
     url(r'', include('tags.urls', namespace='tags')),
     url(r'^admin/', include(admin.site.urls)),
 )
+
+handler404 = "tags.views.error404"

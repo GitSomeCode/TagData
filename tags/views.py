@@ -8,7 +8,11 @@ from django.views.generic import DetailView, ListView, TemplateView, View
 from operator import itemgetter
 import json
 
-# Create your views here.
+# small view for Error 404 page
+def error404(request):
+    return render(request, 'tags/404.html')
+
+
 class DisplayRelations(ListView):
   model = Tag
   template_name = "tags/relations.html"
