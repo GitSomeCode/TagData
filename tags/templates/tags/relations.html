@@ -4,6 +4,7 @@
 {% block title %}Search Results{% endblock %}
 
 {% block styles %}
+<link rel="stylesheet" href="{% static 'tags/css/relations.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -48,11 +49,11 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1>Tags related to: {{ searched }}</h1>
-    <button type="button" class="btn btn-default" id="compare" data-toggle="tooltip" data-placement="right" title="similar to {{ searched }}">compare with last.fm</button>
+      <h1>Tags related to <span id="searched_term">{{ searched }}</span></h1>
+    <button type="button" class="btn btn-default" id="compare" title="similar to {{ searched }}">compare with last.fm</button>
     
     <div class="table-responsive">
-      <table class="table table-bordered .table-hover" id="myTable">
+      <table class="table table-bordered table-hover table-striped" id="myTable">
         <tr>
           <th id="ourTag">tag</th>
           <th id="ourMetric">metric</th>
@@ -75,13 +76,13 @@
     <div id="paginate">
       {% if is_paginated %}
         {% if page_obj.has_previous %}
-          <a href="{% url 'tags:relations' %}?s={{ searched }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        <button class="btn btn-default" id="prev"><a href="{% url 'tags:relations' %}?s={{ searched }}&page={{ page_obj.previous_page_number }}">Previous</a></button>
         {% endif %}
 
          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
         
         {% if page_obj.has_next %}
-            <a href="{% url 'tags:relations' %}?s={{ searched }}&page={{ page_obj.next_page_number }}">Next</a>
+        <button class="btn btn-default" id="next"><a href="{% url 'tags:relations' %}?s={{ searched }}&page={{ page_obj.next_page_number }}">Next</a></button>
         {% endif %}
 
       {% endif %}
@@ -119,7 +120,7 @@
       Before anything, it cleans up the table first!
       */
         cleanUp();
-        $('#myTable').find("tr:first").append("<th>LastFM tag</th>");
+        $('#myTable').find("tr:first").append("<th id='theirTag'>LastFM tag</th>");
         $('#myTbody tr').each(function(index){
           $(this).append("<td>" + somedata[index] + "</td>");
         });
@@ -134,13 +135,11 @@
         $('td:nth-child(2)').hide();
         $('#ourMetric').hide();
         $('#paginate').hide();
-        $('#compare').hide();
+        //$('#compare').hide();
+        $("#compare").css("visibility", "hidden");
       }
       
       $(document).ready(function(){
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        });
         
         $('#compare').click(function(){
         
