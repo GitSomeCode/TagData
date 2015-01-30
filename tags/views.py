@@ -59,8 +59,26 @@ class DisplayRelations(ListView):
 class CompareLastFM(View):
   def get(self, request, *args, **kwargs):
     tag_to_compare = self.request.GET.get("s", None)
-    lastfmResults = compareLastFM(tag_to_compare)
+    lastfmResults = {"tagbits":self.getMostSimilar(tag_to_compare), "lastfm": compareLastFM(tag_to_compare)}
     return HttpResponse(json.dumps(lastfmResults), content_type="application/json")
+  
+  def getMostSimilar(self, compare):
+    relations_names = []
+    
+    # name is passed, but we need Tag
+    compare_tag = Tag.objects.get(name=compare)
+    
+    # returns a list of tag relations ordered by closest association
+    relations_list= compare_tag.tag_to.all().order_by("metric").reverse()
+    
+    for r in relations_list:
+        if r.tag_to.name == compare:
+            relations_names.append(r.tag_from.name)
+        else:
+            relations_names.append(r.tag_to.name)
+            
+    return relations_names[:50]
+    
     
   
   

@@ -107,6 +107,7 @@
             appendData(data);
           },
           error: function(data, textstatus, jqXHR){
+            window.x = data;
             alert("Ooops, error!");
           }
         });
@@ -118,12 +119,23 @@
       makes a new column to display the tags from 
       lastFM's getSimilarTag api call. 
       Before anything, it cleans up the table first!
+      JSON data = {"tagbits":["", "", ..., ""], "lastfm":["","", ..., ""]}
       */
         cleanUp();
+        
+        // make a "LastFM" table header
         $('#myTable').find("tr:first").append("<th id='theirTag'>LastFM tag</th>");
+        
+        // make 50 rows for the data about to be entered
+        for(var i = 0; i < 50; i++){
+          $("#myTbody").append("<tr></tr>");
+        }
+        
+        // in each row, append data to appropriate columns
         $('#myTbody tr').each(function(index){
-          $(this).append("<td>" + somedata[index] + "</td>");
-        });
+          $(this).append("<td>" + somedata["tagbits"][index] + "</td>");
+          $(this).append("<td>" + somedata["lastfm"][index] + "</td>");
+         });
       }
       
       function cleanUp(){
@@ -132,10 +144,14 @@
       Hides pagination, because LastFM similar tags method
       shows only 50 tags.
       */
-        $('td:nth-child(2)').hide();
+        
+        // hides "ourMetric" table header
         $('#ourMetric').hide();
+          
+        // empties table body...just table headers and tbody tags remain
+        $("#myTbody").empty();
+          
         $('#paginate').hide();
-        //$('#compare').hide();
         $("#compare").css("visibility", "hidden");
       }
       
