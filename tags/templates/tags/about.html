@@ -1,7 +1,7 @@
 {% extends 'tags/base.html' %}
 {% load staticfiles %}
 
-{% block title %}Search Results{% endblock %}
+{% block title %}About{% endblock %}
 
 {% block styles %}
 {% endblock %}
@@ -47,7 +47,224 @@
     
     
    <h2>How do we associate tags together?</h2>
+   <h4>What information can we use to draw a connection between two tags?</h4>
+   <i class="fa fa-long-arrow-down fa-2x"></i>
+    
+   <h2>What kind of information do we receive when we collect tags?</h2>
+   <h4>
+     This depends on the data returned by last.fm's API calls; specifically to 
+     <span class="label label-default">
+       <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
+         Top Artists Method
+       </a>
+     </span> 
+     and 
+     <span class="label label-default">
+       <a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">
+         Top Tags Method
+       </a>
+     </span>
+     .
+    </h4> 
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <pre>
+            <code>
+ {  
+   "artists":{  
+      "artist":{  
+         "name":"Coldplay",
+         "playcount":"399982",
+         "listeners":"83382",
+         "mbid":"cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+         "url":"http:\/\/www.last.fm\/music\/Coldplay",
+         "streamable":"0",
+         "image":[  
+            {  
+               "#text":"http:\/\/userserve-ak.last.fm\/serve\/34\/97790751.png",
+               "size":"small"
+            },
+            {  
+               "#text":"http:\/\/userserve-ak.last.fm\/serve\/64\/97790751.png",
+               "size":"medium"
+            },
+            {  
+               "#text":"http:\/\/userserve-ak.last.fm\/serve\/126\/97790751.png",
+               "size":"large"
+            },
+            {  
+               "#text":"http:\/\/userserve-ak.last.fm\/serve\/252\/97790751.png",
+               "size":"extralarge"
+            },
+            {  
+               "#text":"http:\/\/userserve-ak.last.fm\/serve\/_\/97790751\/Coldplay+Ghost+Stories+Era++PNG.png",
+               "size":"mega"
+            }
+         ]
+      },
+      "@attr":{  
+         "page":"1",
+         "perPage":"1",
+         "totalPages":"1000",
+         "total":"1000"
+      }
+   }
+}
+            </code>
+          </pre>
+        </div>
+    
+        <div class="col-md-6">
+          <pre>
+            <code>
+{  
+   "toptags":{  
+      "tag":[  
+         {  
+            "name":"rock",
+            "count":"100",
+            "url":"http:\/\/www.last.fm\/tag\/rock"
+         },
+         {  
+            "name":"alternative",
+            "count":"87",
+            "url":"http:\/\/www.last.fm\/tag\/alternative"
+         },
+         {  
+            "name":"britpop",
+            "count":"80",
+            "url":"http:\/\/www.last.fm\/tag\/britpop"
+         },
+         {  
+            "name":"alternative rock",
+            "count":"67",
+            "url":"http:\/\/www.last.fm\/tag\/alternative%20rock"
+         },
+         {  
+            "name":"indie",
+            "count":"54",
+            "url":"http:\/\/www.last.fm\/tag\/indie"
+         },
+         {  
+            "name":"british",
+            "count":"28",
+            "url":"http:\/\/www.last.fm\/tag\/british"
+         },
+         {  
+            "name":"Coldplay",
+            "count":"18",
+            "url":"http:\/\/www.last.fm\/tag\/coldplay"
+         },
+         {  
+            "name":"pop",
+            "count":"17",
+            "url":"http:\/\/www.last.fm\/tag\/pop"
+         }
+      ],
+      "@attr":{  
+         "artist":"Coldplay"
+      }
+   }
+}
+        </code>
+      </pre>
+    </div> 
+  </div>
+</div>
+    
+    <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4><strong>Important Note</strong></h4>
+            The data shown for 
+            <span class="label label-default">
+             <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
+              Top Artists Method
+             </a>
+            </span> 
+            &nbsp; was limited to one artist, "Coldplay".
+            <br>
+            The data shown for 
+            <span class="label label-default">
+             <a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">
+               Top Tags Method
+             </a>
+           </span>
+            &nbsp; was taken from Coldplay's top tags, and I personally limited the number of tags for display.
+          </div>
+    
+   <i class="fa fa-long-arrow-down fa-2x"></i>
+    
+    <h2>What information was collected?</h2>
+   <h4>From the 
+     <span class="label label-default">
+       <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
+         Top Artists Method
+       </a>
+     </span>
+      method, only the artists names were collected, and from the 
+     <span class="label label-default">
+       <a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">
+         Top Tags Method
+       </a>
+     </span>
+     method, each tag's name and count were collected, as well as the total number of tags.
+    </h4>
+    <div class="alert alert-info" role="alert">
+    <h4>The reasoning</h4>
+    Before dumping all tags together in one big data set, tags should carry with them some information
+    about the artist they came from. Tags most definately will overlap between artists, but just by being in an artists' tag pool relates all those tags together to an extent.
+    </div>
+    
+   <i class="fa fa-long-arrow-down fa-2x"></i>
    
+   <h2>Now, what?</h2>
+   <h4>
+     We are to make some association with one tag to another using the information collected.
+     Before storing each tag, we calculate the relation between every distinct tag pair in an artists' tag pool.
+    </h4>
+     <h5>This calculation is based on two factors,<br>
+       <ul>
+         <li>A <strong>"population"</strong> factor based on the number of tags in the artist tag pool</li>
+         <li>A <strong>"biased"</strong> factor based on each tag's count, <i>i.e.</i> popularity within the artist tag pool</li>
+       </ul>
+      </h5>
+       <div class="alert alert-info" role="alert">
+        <h4>High school students in a class</h4>
+        If we were to calculate some metric between students in a class, the population factor would be an equal 
+        relation to every unique pair of students based on the student count, say 1/(total students). However in high school, a student's
+        popularity matters or, whatever. If a cheerleader hangs out with a nerd in the same class, then the cheerleader's popularity might decrease whereas the 
+        nerd's popularity might increase. This is just in the movies, of course.
+      </div>
+      
+     <h4>
+     A metric is created for every distinct tag pair in an artist pool before it gets stored in a dataset. Then, the next artist's tags are calculated
+     and stored in the data set. If tags overlap, then the new metric is added to the existing. This process is repeat for all top artists returned to us from 
+     <span class="label label-default">
+       <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
+         Top Artists Method
+       </a>
+     </span>
+       .
+     </h4>
+     
+     <div class="alert alert-info" role="alert">
+        <h4>Different classes, different students</h4>
+        In high school, there are different classes. When you move from class to class, the students in your class change. Some might be the same, but generally 
+       you see new faces in each class. A student might be considered unpopular in Biology class, but highly popular in English. Therefore, his or her relation to 
+       every student in every class changes. 
+      </div>
+    
+    <i class="fa fa-long-arrow-down fa-2x"></i>
+    
+    <h2>last.fm's take</h2>
+    <h4>
+      With every search, you can compare the results with last.fm's results for the same tag based on the 
+      <span class="label label-default"><a href="http://www.last.fm/api/show/tag.getSimilar" target="_blank">Get Similar Tags Method</a></span> 
+      method. This method returns the first 50 tags similar to the tag searched, so with this option you will be able to compare only the first 50 tags from
+      the original search.
+    </h4>
     
   </div>
 </div>
@@ -56,5 +273,589 @@
     
 
 {% block scripts %}
+<script type="text/javascript">
+var topArtists = {
+  "artists": {
+    "@attr": {
+      "totalPages": "500", 
+      "total": "1000", 
+      "perPage": "2", 
+      "page": "1"
+    }, 
+    "artist": [
+      {
+        "streamable": "0", 
+        "name": "Coldplay", 
+        "url": "http://www.last.fm/music/Coldplay", 
+        "image": [
+          {
+            "#text": "http://userserve-ak.last.fm/serve/34/97790751.png", 
+            "size": "small"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/64/97790751.png", 
+            "size": "medium"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/126/97790751.png", 
+            "size": "large"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/252/97790751.png", 
+            "size": "extralarge"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/_/97790751/Coldplay+Ghost+Stories+Era++PNG.png", 
+            "size": "mega"
+          }
+        ], 
+        "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234", 
+        "listeners": "85526", 
+        "playcount": "405695"
+      }, 
+      {
+        "streamable": "0", 
+        "name": "Ed Sheeran", 
+        "url": "http://www.last.fm/music/Ed+Sheeran", 
+        "image": [
+          {
+            "#text": "http://userserve-ak.last.fm/serve/34/98780571.png", 
+            "size": "small"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/64/98780571.png", 
+            "size": "medium"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/126/98780571.png", 
+            "size": "large"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/252/98780571.png", 
+            "size": "extralarge"
+          }, 
+          {
+            "#text": "http://userserve-ak.last.fm/serve/500/98780571/Ed+Sheeran+PNG.png", 
+            "size": "mega"
+          }
+        ], 
+        "mbid": "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6", 
+        "listeners": "79045", 
+        "playcount": "419414"
+      }
+    ]
+  }
+}
+
+var topTags = {
+  "toptags": {
+    "tag": [
+      {
+        "count": "100", 
+        "url": "http://www.last.fm/tag/rock", 
+        "name": "rock"
+      }, 
+      {
+        "count": "87", 
+        "url": "http://www.last.fm/tag/alternative", 
+        "name": "alternative"
+      }, 
+      {
+        "count": "80", 
+        "url": "http://www.last.fm/tag/britpop", 
+        "name": "britpop"
+      }, 
+      {
+        "count": "67", 
+        "url": "http://www.last.fm/tag/alternative%20rock", 
+        "name": "alternative rock"
+      }, 
+      {
+        "count": "54", 
+        "url": "http://www.last.fm/tag/indie", 
+        "name": "indie"
+      }, 
+      {
+        "count": "28", 
+        "url": "http://www.last.fm/tag/british", 
+        "name": "british"
+      }, 
+      {
+        "count": "18", 
+        "url": "http://www.last.fm/tag/coldplay", 
+        "name": "Coldplay"
+      }, 
+      {
+        "count": "17", 
+        "url": "http://www.last.fm/tag/pop", 
+        "name": "pop"
+      }, 
+      {
+        "count": "10", 
+        "url": "http://www.last.fm/tag/indie%20rock", 
+        "name": "indie rock"
+      }, 
+      {
+        "count": "4", 
+        "url": "http://www.last.fm/tag/pop%20rock", 
+        "name": "pop rock"
+      }, 
+      {
+        "count": "3", 
+        "url": "http://www.last.fm/tag/piano%20rock", 
+        "name": "piano rock"
+      }, 
+      {
+        "count": "3", 
+        "url": "http://www.last.fm/tag/uk", 
+        "name": "UK"
+      }, 
+      {
+        "count": "2", 
+        "url": "http://www.last.fm/tag/soft%20rock", 
+        "name": "soft rock"
+      }, 
+      {
+        "count": "2", 
+        "url": "http://www.last.fm/tag/mellow", 
+        "name": "Mellow"
+      }, 
+      {
+        "count": "2", 
+        "url": "http://www.last.fm/tag/chillout", 
+        "name": "chillout"
+      }, 
+      {
+        "count": "2", 
+        "url": "http://www.last.fm/tag/male%20vocalists", 
+        "name": "male vocalists"
+      }, 
+      {
+        "count": "2", 
+        "url": "http://www.last.fm/tag/piano", 
+        "name": "piano"
+      }, 
+      {
+        "count": "2", 
+        "url": "http://www.last.fm/tag/00s", 
+        "name": "00s"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/chill", 
+        "name": "chill"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/favorites", 
+        "name": "favorites"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/acoustic", 
+        "name": "acoustic"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/indie%20pop", 
+        "name": "indie pop"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/singer-songwriter", 
+        "name": "singer-songwriter"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/english", 
+        "name": "english"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/emo", 
+        "name": "emo"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/brit%20rock", 
+        "name": "brit rock"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/brit%20pop", 
+        "name": "brit pop"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/love", 
+        "name": "Love"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/classic%20rock", 
+        "name": "classic rock"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/electronic", 
+        "name": "electronic"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/pop-rock", 
+        "name": "Pop-Rock"
+      }, 
+      {
+        "count": "1", 
+        "url": "http://www.last.fm/tag/90s", 
+        "name": "90s"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/overrated", 
+        "name": "overrated"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/london", 
+        "name": "london"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/cold%20play", 
+        "name": "cold play"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/britrock", 
+        "name": "Britrock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favourites", 
+        "name": "Favourites"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/relax", 
+        "name": "relax"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/progressive%20rock", 
+        "name": "Progressive rock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/beautiful", 
+        "name": "beautiful"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/easy%20listening", 
+        "name": "easy listening"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/punk", 
+        "name": "punk"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/post-britpop", 
+        "name": "post-Britpop"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/awesome", 
+        "name": "Awesome"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favorite", 
+        "name": "Favorite"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/melancholy", 
+        "name": "melancholy"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/england", 
+        "name": "england"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/viva%20la%20vida", 
+        "name": "viva la vida"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/brit", 
+        "name": "Brit"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/british%20rock", 
+        "name": "british rock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/melancholic", 
+        "name": "melancholic"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favourite", 
+        "name": "favourite"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/amazing", 
+        "name": "amazing"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/male%20vocalist", 
+        "name": "male vocalist"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/want%20to%20see%20live", 
+        "name": "want to see live"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/boring", 
+        "name": "boring"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/ambient", 
+        "name": "ambient"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/electronica", 
+        "name": "electronica"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/metal", 
+        "name": "metal"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/female%20vocalists", 
+        "name": "female vocalists"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/cool", 
+        "name": "cool"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/punk%20rock", 
+        "name": "punk rock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/soft", 
+        "name": "soft"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/alternative%20pop", 
+        "name": "alternative pop"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/folk", 
+        "name": "folk"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/relaxing", 
+        "name": "relaxing"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favorite%20artists", 
+        "name": "Favorite Artists"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/band", 
+        "name": "band"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/hard%20rock", 
+        "name": "hard rock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favorite%20bands", 
+        "name": "Favorite Bands"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/calm", 
+        "name": "calm"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/mainstream", 
+        "name": "mainstream"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/hip-hop", 
+        "name": "Hip-Hop"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/80s", 
+        "name": "80s"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favourite%20artists", 
+        "name": "favourite artists"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/slow", 
+        "name": "slow"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/jazz", 
+        "name": "jazz"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/brit-pop", 
+        "name": "Brit-pop"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/dance", 
+        "name": "dance"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/post-rock", 
+        "name": "post-rock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/hardcore", 
+        "name": "hardcore"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/music", 
+        "name": "music"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/united%20kingdom", 
+        "name": "United Kingdom"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/grunge", 
+        "name": "Grunge"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/good%20music", 
+        "name": "good music"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/alt%20rock", 
+        "name": "alt rock"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/experimental", 
+        "name": "experimental"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/favourite%20bands", 
+        "name": "Favourite bands"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/fix%20you", 
+        "name": "fix you"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/yellow", 
+        "name": "yellow"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/new%20wave", 
+        "name": "new wave"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/good%20stuff", 
+        "name": "Good Stuff"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/trance", 
+        "name": "trance"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/instrumental", 
+        "name": "instrumental"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/classical", 
+        "name": "Classical"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/cold", 
+        "name": "cold"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/blues", 
+        "name": "blues"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/rap", 
+        "name": "rap"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/soundtrack", 
+        "name": "Soundtrack"
+      }, 
+      {
+        "count": "0", 
+        "url": "http://www.last.fm/tag/techno", 
+        "name": "techno"
+      }
+    ], 
+    "@attr": {
+      "artist": "Coldplay"
+    }
+  }
+}
+</script>
 {% endblock %}
     

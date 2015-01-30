@@ -8,5 +8,6 @@ urlpatterns = patterns('',
   url(r'^compare/tag/$', views.CompareLastFM.as_view(), name="compare"),
   url(r'^about/$', TemplateView.as_view(template_name="tags/about.html"), name="about"),
   url(r'^contact/$', TemplateView.as_view(template_name="tags/contact.html"), name="contact"),
+  url(r'^404/$', TemplateView.as_view(template_name="tags/404.html"), name="404page"),
   #url(r'^', views.tagData, name="tagData"),                     
 )

@@ -49,7 +49,7 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Tags related to: {{ searched }}</h1>
-    <input type="button" class="btn btn-dafult" id="compare" value="compare to LastFM's similar tags">
+    <button type="button" class="btn btn-default" id="compare" data-toggle="tooltip" data-placement="right" title="similar to {{ searched }}">compare with last.fm</button>
     
     <div class="table-responsive">
       <table class="table table-bordered .table-hover" id="myTable">
@@ -138,6 +138,9 @@
       }
       
       $(document).ready(function(){
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
         
         $('#compare').click(function(){
         
