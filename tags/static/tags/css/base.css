@@ -1,8 +1,11 @@
 .label, .label-default {
     background-color: #E29F53;
-    padding: 8px 8px 8px 8px;
     border: 2px solid #FFDDB0;
     border-radius: 10px;
+}
+
+.indexcontainer .label-default{
+    padding: 8px 8px 8px 8px;
 }
 
 .label-default > a{
@@ -22,6 +25,20 @@
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
 color: #FFF;
 background-color: #F2C087;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus{
+    color: #E29F53;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+     color: #DBA36D;
+}
+
+.heading{
+    color: rgb(187, 185, 183);
 }
 
 .fa-search{

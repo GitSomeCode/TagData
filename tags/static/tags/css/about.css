@@ -1,0 +1,47 @@
+/*
+    Document   : tagdata/tags/static/tags/css/about．css
+    Created on : 2015-01-30 04:53 AM
+    Author     : GitSomeCode
+    Description:
+    Purpose of the stylesheet follows.
+    To change this template use Tools | Templates.
+*/
+
+root {
+    display: block;
+}
+
+.jumbotron{
+    background-color: #FFFFFF;
+    border: 1px solid #FFDB7E;
+}
+
+.fa-long-arrow-down{
+    color: #EDB44B;
+    margin-left: 20px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.oneline{
+    display:inline !important;
+}
+
+.label-default{
+    margin: 0 2px 3px 2px;
+}
+
+h4 .label-default{
+    font-size: x-small;
+}
+
+.alert-info{
+    margin-top: 20px;
+    color: #FFFFFF;
+    background-color: #EDC987;
+    border-color: #ECAA53;
+}
+
+h4{
+    color: #E0BC83;
+}

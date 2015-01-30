@@ -4,6 +4,7 @@
 {% block title %}About{% endblock %}
 
 {% block styles %}
+<link rel="stylesheet" href="{% static 'tags/css/about.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -46,26 +47,27 @@
   <div class="jumbotron">
     
     
-   <h2>How do we associate tags together?</h2>
+   <h2 class="heading">How do we associate tags together?</h2>
    <h4>What information can we use to draw a connection between two tags?</h4>
-   <i class="fa fa-long-arrow-down fa-2x"></i>
+   <i class="fa fa-long-arrow-down fa-3x"></i>
     
-   <h2>What kind of information do we receive when we collect tags?</h2>
-   <h4>
-     This depends on the data returned by last.fm's API calls; specifically to 
-     <span class="label label-default">
-       <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
-         Top Artists Method
-       </a>
-     </span> 
-     and 
-     <span class="label label-default">
-       <a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">
-         Top Tags Method
-       </a>
-     </span>
-     .
-    </h4> 
+   <h2 class="heading">What kind of information do we receive when we collect tags?</h2>
+       <h4>
+         This depends on the data returned by last.fm's API calls; specifically to
+       
+         <span class="label label-default">
+           <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
+             Top Artists Method
+           </a>
+         </span>
+         and
+         <span class="label label-default">
+           <a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">
+             Top Tags Method
+           </a>
+         </span>
+         . 
+      </h4>
     
     <div class="container">
       <div class="row">
@@ -192,39 +194,42 @@
              </a>
            </span>
             &nbsp; was taken from Coldplay's top tags, and I personally limited the number of tags for display.
+           
           </div>
+          
+   <i class="fa fa-long-arrow-down fa-3x"></i>
     
-   <i class="fa fa-long-arrow-down fa-2x"></i>
-    
-    <h2>What information was collected?</h2>
+    <h2 class="heading">What information was collected?</h2>
    <h4>From the 
      <span class="label label-default">
        <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
          Top Artists Method
        </a>
      </span>
-      method, only the artists names were collected, and from the 
+     method, only the artists names were collected, and from the 
      <span class="label label-default">
        <a href="http://www.last.fm/api/show/artist.getTopTags" target="_blank">
          Top Tags Method
        </a>
      </span>
-     method, each tag's name and count were collected, as well as the total number of tags.
-    </h4>
+      method, each tag's name and count were collected, as well as the total number of tags.
+       </h4>
     <div class="alert alert-info" role="alert">
     <h4>The reasoning</h4>
     Before dumping all tags together in one big data set, tags should carry with them some information
     about the artist they came from. Tags most definately will overlap between artists, but just by being in an artists' tag pool relates all those tags together to an extent.
     </div>
+      
     
-   <i class="fa fa-long-arrow-down fa-2x"></i>
+   <i class="fa fa-long-arrow-down fa-3x"></i>
    
-   <h2>Now, what?</h2>
+   <h2 class="heading">Now, what?</h2>
    <h4>
      We are to make some association with one tag to another using the information collected.
      Before storing each tag, we calculate the relation between every distinct tag pair in an artists' tag pool.
-    </h4>
-     <h5>This calculation is based on two factors,<br>
+    
+     <h5>
+        This calculation is based on two factors,
        <ul>
          <li>A <strong>"population"</strong> factor based on the number of tags in the artist tag pool</li>
          <li>A <strong>"biased"</strong> factor based on each tag's count, <i>i.e.</i> popularity within the artist tag pool</li>
@@ -237,10 +242,12 @@
         popularity matters or, whatever. If a cheerleader hangs out with a nerd in the same class, then the cheerleader's popularity might decrease whereas the 
         nerd's popularity might increase. This is just in the movies, of course.
       </div>
+      </h4>
       
      <h4>
      A metric is created for every distinct tag pair in an artist pool before it gets stored in a dataset. Then, the next artist's tags are calculated
-     and stored in the data set. If tags overlap, then the new metric is added to the existing. This process is repeat for all top artists returned to us from 
+     and stored in the data set. If tags overlap, then the new metric is added to the existing. This process is repeat for all top artists returned to us from
+     
      <span class="label label-default">
        <a href="http://www.last.fm/api/show/chart.getTopArtists" target="_blank">
          Top Artists Method
@@ -248,7 +255,6 @@
      </span>
        .
      </h4>
-     
      <div class="alert alert-info" role="alert">
         <h4>Different classes, different students</h4>
         In high school, there are different classes. When you move from class to class, the students in your class change. Some might be the same, but generally 
@@ -256,12 +262,14 @@
        every student in every class changes. 
       </div>
     
-    <i class="fa fa-long-arrow-down fa-2x"></i>
+    <i class="fa fa-long-arrow-down fa-3x"></i>
     
-    <h2>last.fm's take</h2>
+    <h2 class="heading">last.fm's take</h2>
     <h4>
-      With every search, you can compare the results with last.fm's results for the same tag based on the 
+      With every search, you can compare the results with last.fm's results for the same tag based on the
+    
       <span class="label label-default"><a href="http://www.last.fm/api/show/tag.getSimilar" target="_blank">Get Similar Tags Method</a></span> 
+   
       method. This method returns the first 50 tags similar to the tag searched, so with this option you will be able to compare only the first 50 tags from
       the original search.
     </h4>
