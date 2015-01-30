@@ -23,7 +23,7 @@ class DisplayRelations(ListView):
   def get_queryset(self):
     searched_tag = self.request.GET.get("s", None)
     if not searched_tag:
-      return None
+      raise Http404
     root_tag = get_object_or_404(Tag, name=searched_tag)
     
     '''
