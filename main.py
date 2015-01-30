@@ -7,7 +7,7 @@ from django.conf import settings
 from tags.models import Tag, TagRelation
 import itertools, json
 
-ARTIST_LIMIT = "4"
+ARTIST_LIMIT = "2"
 api_url = "http://ws.audioscrobbler.com/2.0/"
 artists = []
 ##################################
@@ -106,13 +106,14 @@ def TF(search):
   return mylist
 #################################
 
-def getTopArtists():
+def getTopArtists(pageNum):
   '''
   Calls api method "chart.getTopArtists"
   Stores artist names in list
   '''
-  topArtists = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"chart.gettopartists", "format":"json", "limit":ARTIST_LIMIT})
+  topArtists = unirest.post(api_url, headers={"Accept":"application/json"}, params={"api_key":settings.API_KEY, "method":"chart.gettopartists", "format":"json", "page":pageNum})
   result = topArtists.body
+  #import pdb; pdb.set_trace();
   
   # making a list of artist names from chart.getTopArtists
   for a in result["artists"]["artist"]:
@@ -154,5 +155,9 @@ if __name__ == '__main__':
   Main entry point to the script.
   """
   django.setup()
-  getTopArtists()
-  artistRelation(artists)
+  
+  for i in range(1,21):
+    getTopArtists(i)
+    #import pdb; pdb.set_trace();
+    artistRelation(artists)
+    artists = []
