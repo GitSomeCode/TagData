@@ -28,7 +28,7 @@ root {
 }
 
 .label-default{
-    margin: 0 2px 3px 2px;
+    margin: 5px;
 }
 
 h4 .label-default{
@@ -37,11 +37,22 @@ h4 .label-default{
 
 .alert-info{
     margin-top: 20px;
-    color: #FFFFFF;
-    background-color: #EDC987;
+    color: #BABABA;
+    background-color: #FFFFFF;
     border-color: #ECAA53;
 }
 
 h4{
-    color: #E0BC83;
+    color: #999292;
+    margin-bottom: 10px;
+}
+
+ul li{
+    color: #DD9C34;
+}
+
+pre{
+    color: #999292;
+    background-color: #FFFFFF;
+    border: 1px solid #E29742;
 }

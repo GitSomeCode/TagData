@@ -1,0 +1,25 @@
+/*
+    Document   : tagdata/tags/static/tags/css/cnct404．css
+    Created on : 2015-01-30 06:15 AM
+    Author     : GitSomeCode
+    Description:
+    Purpose of the stylesheet follows.
+    To change this template use Tools | Templates.
+*/
+
+root {
+    display: block;
+}
+
+.jumbotron{
+    background-color: #FFFFFF;
+    border: 1px solid #FFDB7E;
+}
+
+h5, a{
+    color: #E4AE80;
+}
+
+h3{
+    color: #B8B4B4;
+}
