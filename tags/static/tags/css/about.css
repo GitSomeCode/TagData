@@ -32,9 +32,8 @@ root {
 }
 
 h4 .label-default{
-    font-size: x-small;
+    font-size: small;
 }
-
 .alert-info{
     margin-top: 20px;
     color: #BABABA;
@@ -45,6 +44,7 @@ h4 .label-default{
 h4{
     color: #999292;
     margin-bottom: 10px;
+    line-height: 33px;
 }
 
 ul li{
