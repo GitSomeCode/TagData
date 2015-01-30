@@ -16,8 +16,8 @@ root {
     border: 1px solid #FFDB7E;
 }
 
-h5, a{
-    color: #E4AE80;
+h5, a, a:hover, a:active{
+    color: #E4AE80 !important;
 }
 
 h3{
