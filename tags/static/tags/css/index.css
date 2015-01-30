@@ -1,25 +1,3 @@
-/*
-heading - 
-font/color for main title, table headings
-
-maintile - 
-size of main title
-
-searchbar - 
-width, height, color of search bar
-
-descriptions - 
-font, color of homepage descriptions
-
-descriptions i - 
-padding, color
-
-methodlinks - 
-size, color 
-
-
-*/
-
 #maintitle{
     font-size: 50px;
 }

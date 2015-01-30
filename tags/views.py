@@ -41,13 +41,9 @@ class DisplayRelations(ListView):
         if relation:
           t = ()
           if relation.tag_to.name == search:
-            print relation.tag_from.name
-            print relation.metric
             t += (relation.tag_from.name, relation.metric)
             mylist.append(t)
           else:
-            print relation.tag_to.name
-            print relation.metric
             t += (relation.tag_to.name, relation.metric)
             mylist.append(t)
       return mylist
@@ -57,11 +53,18 @@ class DisplayRelations(ListView):
     return query_set
 
 class CompareLastFM(View):
+  '''
+  Sends JSON data -- top 50 of our similar tags, and top 50 of last.fm's similar tags
+  '''
   def get(self, request, *args, **kwargs):
     tag_to_compare = self.request.GET.get("s", None)
     lastfmResults = {"tagbits":self.getMostSimilar(tag_to_compare), "lastfm": compareLastFM(tag_to_compare)}
     return HttpResponse(json.dumps(lastfmResults), content_type="application/json")
   
+  '''
+  Compiles a list of similar tags to original search.
+  Used for compare option.
+  '''
   def getMostSimilar(self, compare):
     relations_names = []
     

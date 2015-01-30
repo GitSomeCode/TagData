@@ -49,7 +49,7 @@
 
 <div class="container">
   <div class="jumbotron">
-      <h1>Tags related to <span id="searched_term">{{ searched }}</span></h1>
+    <h1>Tags related to <span id="searched_term">{{ searched }}</span></h1>
     <button type="button" class="btn btn-default" id="compare" title="similar to {{ searched }}">compare with last.fm</button>
     
     <div class="table-responsive">
@@ -116,10 +116,14 @@
       function appendData(somedata){
       /*
       This function takes data returned from AJAX get and 
-      makes a new column to display the tags from 
+      makes new columns to display the tags from 
       lastFM's getSimilarTag api call. 
       Before anything, it cleans up the table first!
       JSON data = {"tagbits":["", "", ..., ""], "lastfm":["","", ..., ""]}
+      
+      note: reason it has to display our tags is because
+      paginated results were being shown as top 50. Now, we 
+      just get back the top 50 and create the column again.
       */
         cleanUp();
         
@@ -140,9 +144,9 @@
       
       function cleanUp(){
       /* 
-      Hides the metric column.
-      Hides pagination, because LastFM similar tags method
-      shows only 50 tags.
+       After this function is called, table should 
+       have only one header for our tags, and the tbody 
+       tags. Everything within tbody removed!
       */
         
         // hides "ourMetric" table header
@@ -150,8 +154,10 @@
           
         // empties table body...just table headers and tbody tags remain
         $("#myTbody").empty();
-          
+        
         $('#paginate').hide();
+          
+        // hide compare button but leave its space in html page
         $("#compare").css("visibility", "hidden");
       }
       
@@ -160,6 +166,7 @@
         $('#compare').click(function(){
         
           seeComparison();
+            
         });
         
       });
