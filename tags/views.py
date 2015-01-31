@@ -32,28 +32,43 @@ class DisplayRelations(ListView):
     
     '''
     Compiling all relations to searched tag.
-    Uses getRelation method from main.py because searched tag may be in a relation where it is either a tag_to or tag_from.
-    Also gets metric between the two tags.
-    Information for each relation is stored in a tuple.
-    Stores all relations in relations_list.
     Ex. relations to 'rock' -- [('indie', 0.8793), ('pop', 1.342), ..., (related_tag, metric)]
     '''
+    
     def relationsList(search):
       mylist = []
-      for tag in Tag.objects.all():
-        relation = getRelation(search, tag.name)
-        if relation:
-          t = ()
-          if relation.tag_to.name == search:
-            t += (relation.tag_from.name, relation.metric)
-            mylist.append(t)
-          else:
-            t += (relation.tag_to.name, relation.metric)
-            mylist.append(t)
-      return mylist
+      tagtolist = []
+      tagfromlist = []
 
-    # Sorts metric in descending order, so the most related tags are first
-    query_set = sorted(relationsList(searched_tag), key=itemgetter(1), reverse=True)
+      # TAG TO == search 
+
+      #returns a list of tag relations ordered by closest association
+      tagtolist = search.tag_to.all().order_by("metric").reverse()
+      for r in tagtolist:
+        t = ()
+        t += (r.tag_from.name, r.metric)
+        mylist.append(t)
+
+
+
+      # TAG FROM == search 
+
+      #returns a list of tag relations ordered by closest association
+      tagfromlist = search.tag_from.all().order_by("metric").reverse()
+      
+      for r in tagfromlist:
+        t = ()
+        t += (r.tag_to.name, r.metric)
+        mylist.append(t)
+     
+      ### mylist has all of rock's relations, need to order them by metric
+      ### which is second tuple 
+
+      sorted(mylist, key=lambda x: x[1], reverse=True)
+      
+      return mylist
+    
+    query_set = relationsList(root_tag)
     return query_set
 
 class CompareLastFM(View):
