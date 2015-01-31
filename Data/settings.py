@@ -38,7 +38,7 @@ API_KEY = "ff51b4c5accb4afdc6dee971884949b3"
 SECRET_KEY = '7t@ssguzxci^93%(^fp44z-6q406s19nvs%3aoho_6g6#rodkm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
