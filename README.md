@@ -20,7 +20,7 @@ populate database by running main.py to
 - stores in database as a TagRelation
 
 ##concerns 
-Searching may be slow due to hosting settings.
+~~Searching may be slow due to hosting settings~~ Now deployed to Heroku
 
 
 
