@@ -26,3 +26,12 @@ body {
   margin: 20px 0;
 }
 
+.text-muted > a{
+    text-decoration: none;
+    color: #ffffff !important;
+}
+
+.text-muted > a:active, .text-muted > a:hover{
+    color: #aa6317 !important;
+}
+
