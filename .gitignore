@@ -54,8 +54,6 @@ docs/_build/
 target/
 
 # Database
-*.sqlite3
-db.sqlite3
 
 # Virtual Environment
 bin/
