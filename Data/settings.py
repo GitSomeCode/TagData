@@ -14,10 +14,11 @@ import environ
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Reads the environment file (.env)
-environ.Env.read_env(env_file=".env")
-env = environ.Env()
-API_KEY = env("api_key")
+#environ.Env.read_env(env_file=".env")
+#env = environ.Env()
+#API_KEY = env("api_key")
 
+API_KEY = "ff51b4c5accb4afdc6dee971884949b3"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -26,12 +27,12 @@ API_KEY = env("api_key")
 SECRET_KEY = '7t@ssguzxci^93%(^fp44z-6q406s19nvs%3aoho_6g6#rodkm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['.sjbitcode.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['.sjbitcode.com']
 
 
 # Application definition
