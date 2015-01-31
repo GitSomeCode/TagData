@@ -1,0 +1,62 @@
+body{
+    font-family: 'Muli', sans-serif;
+}
+
+.label, .label-default {
+    background-color: #E29F53;
+    border: 2px solid #FFDDB0;
+    border-radius: 10px;
+}
+
+.indexcontainer .label-default{
+    padding: 8px 8px 8px 8px;
+}
+
+.label-default > a{
+    color: #ffffff;
+}
+
+.navbar-default{
+    border: 1px solid #EFC494;
+    background-color: #ffffff;
+    color: #B8B4B4;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a{
+    color: #B8B4B4;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+color: #FFF !important;
+background-color: #F2C087 !important;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus{
+    color: #E29F53;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+     color: #DBA36D;
+}
+
+.heading{
+    color: rgb(187, 185, 183);
+}
+
+.fa-search{
+    color: #E29F53;
+}
+
+a, a:focus{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+a:hover, a:active{
+    text-decoration: none;
+    color: #c66427;
+}
+
+

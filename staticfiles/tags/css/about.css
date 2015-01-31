@@ -1,0 +1,49 @@
+root {
+    display: block;
+}
+
+.jumbotron{
+    background-color: #FFFFFF;
+    border: 1px solid #FFDB7E;
+}
+
+.fa-long-arrow-down{
+    color: #EDB44B;
+    margin-left: 20px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.oneline{
+    display:inline !important;
+}
+
+.label-default{
+    margin: 5px;
+}
+
+h4 .label-default{
+    font-size: small;
+}
+.alert-info{
+    margin-top: 20px;
+    color: #BABABA;
+    background-color: #FFFFFF;
+    border-color: #ECAA53;
+}
+
+h4{
+    color: #999292;
+    margin-bottom: 10px;
+    line-height: 33px;
+}
+
+ul li{
+    color: #DD9C34;
+}
+
+pre{
+    color: #999292;
+    background-color: #FFFFFF;
+    border: 1px solid #E29742;
+}

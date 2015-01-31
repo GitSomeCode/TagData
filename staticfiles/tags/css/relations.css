@@ -1,0 +1,64 @@
+root {
+    display: block;
+}
+
+.jumbotron{
+    background-color: #FFFFFF;
+    border: 1px solid #FFDB7E;
+}
+
+.jumbotron h1{
+    color: rgb(190, 187, 183) !important;
+}
+
+.btn-default {
+    color: #ABA5A5;
+    background-color: #fff;
+    border-color: #EFC184;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+    background: #EFC184;
+    color: #FFFFFF;
+    border-color: #EFC184;
+}
+
+#compare{
+    margin: 20px 20px 20px 0;
+}
+
+#searched_term, #ourTag, #theirTag, #ourMetric{
+    color: #DAA053;
+}
+
+#ourTag, #theirTag, #ourMetric{
+    font-size: large;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid #FFF;
+}
+
+a, a:focus{
+    text-decoration: none;
+    color: #ABA5A5;
+}
+
+a:hover{
+     color: #FFFFFF;
+}
+
+#myTbody{
+    color: #A19B9B;
+}
+
+#prev{
+    margin-right: 10px;
+}
+
+#next{
+    margin-left:10px;
+}
+
+
+

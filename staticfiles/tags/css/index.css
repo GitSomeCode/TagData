@@ -1,0 +1,25 @@
+#maintitle{
+    font-size: 50px;
+}
+
+.indexcontainer{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.indexcontainer .row{
+    margin-bottom: 35px;
+}
+
+.descriptions i{
+    color: #FFDDB0;
+    margin-right: 15px;
+}
+
+.descriptions{
+    color: #B8B4B4;
+    margin-bottom: 8px;
+}
+
+
+

@@ -13,6 +13,17 @@ import os
 import environ
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+# --- Directory Settings ---
+# Absolute path to the settings directory.
+SETTINGS_DIR = os.path.dirname(__file__)
+
+# Absolute path to the project directory.
+PROJECT_DIR = os.path.dirname(SETTINGS_DIR)
+
+# Absolute path to the root (repo) directory.
+ROOT_DIR = os.path.dirname(PROJECT_DIR)
+# --- /Directory Settings ---
+
 # Reads the environment file (.env)
 #environ.Env.read_env(env_file=".env")
 #env = environ.Env()
@@ -99,5 +110,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'staticfiles')
 STATIC_URL = '/static/'
