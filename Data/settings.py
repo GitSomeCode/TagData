@@ -42,8 +42,8 @@ DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['.sjbitcode.com']
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.sjbitcode.com', '.nitrousbox.com', '.herokuapp.com']
 
 
 # Application definition
