@@ -26,12 +26,12 @@ API_KEY = env("api_key")
 SECRET_KEY = '7t@ssguzxci^93%(^fp44z-6q406s19nvs%3aoho_6g6#rodkm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['.sjbitcode.com']
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.sjbitcode.com']
 
 
 # Application definition
